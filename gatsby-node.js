@@ -1,7 +1,23 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+exports.createSchemaCustomization = ({ actions, schema }) => {
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
 
-// You can delete this file if you're not using it
+    type Frontmatter {
+      title: String
+      items: Item
+    }
+
+    type Item {
+      name: String
+      button: Button
+    }
+
+    type Button {
+      label: String
+      url: String
+    }
+  `
+  actions.createTypes(typeDefs)
+}
